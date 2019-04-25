@@ -1,14 +1,12 @@
 <template>
-  <div class="home">
-    <v-app>
-      <EntityInfo/>
-      <AnnualReport/>
-      <v-container>
-        <v-btn v-if="filedDate == null" color="blue" :disabled="!validated" @click="submit">Pay</v-btn>
-        <v-btn v-else color="blue" :disabled="currentYear == ARFilingYear" @click="nextAR">Next</v-btn>
-      </v-container>
-    </v-app>
-  </div>
+  <v-app>
+    <EntityInfo/>
+    <AnnualReport/>
+    <v-container>
+      <v-btn v-if="filedDate == null" color="blue" :disabled="!validated" @click="submit">Pay</v-btn>
+      <v-btn v-else color="blue" :disabled="currentYear == ARFilingYear" @click="nextAR">Next</v-btn>
+    </v-container>
+  </v-app>
 </template>
 
 <script lang="ts">
