@@ -1,5 +1,5 @@
 <template>
-  <div id="entity-info">
+  <div class="entity-info">
     <v-container>
         <div class="title-container">
           <div class="entity-name">{{ entityName }}</div>
@@ -67,24 +67,23 @@ export default {
   // TODO: Explore how to expose this globally without having to include in each module
   @import "../assets/styles/theme.styl";
 
-  #entity-info
+  .entity-info
     background #fff
 
   .title-container
-    margin-bottom 0.5rem
+    margin-top -0.2rem
 
   .entity-name
     display inline-block
-    font-size 1.5rem
-    font-weight 500
+    font-size 1.25rem
+    font-weight 600
 
   .entity-status
     margin-left 0.5rem
 
   .meta-container
-    margin-top 0.25rem
     overflow hidden
-    font-size 0.875rem
+    font-size 0.8375rem
 
   dd, dt
     float left
@@ -105,4 +104,5 @@ export default {
   .v-chip
     margin-top: 0.25rem
     vertical-align top
+
 </style>
