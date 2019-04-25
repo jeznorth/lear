@@ -1,9 +1,11 @@
 <template>
   <v-app class="app-container" id="app">
     <std-header></std-header>
-    <main>
-      <router-view/>
-    </main>
+    <div class="app-body">
+      <main>
+        <router-view/>
+      </main>
+    </div>
   </v-app>
 </template>
 
