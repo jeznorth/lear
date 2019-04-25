@@ -1,12 +1,14 @@
 <template>
-  <v-app>
+  <div>
     <EntityInfo/>
-    <AnnualReport/>
-    <v-container>
-      <v-btn v-if="filedDate == null" color="blue" :disabled="!validated" @click="submit">Pay</v-btn>
-      <v-btn v-else color="blue" :disabled="currentYear == ARFilingYear" @click="nextAR">Next</v-btn>
+    <v-container class="view-container">
+      <article>
+        <AnnualReport/>
+        <v-btn v-if="filedDate == null" color="blue" :disabled="!validated" @click="submit">Pay</v-btn>
+        <v-btn v-else color="blue" :disabled="currentYear == ARFilingYear" @click="nextAR">Next</v-btn>
+      </article>
     </v-container>
-  </v-app>
+  </div>
 </template>
 
 <script lang="ts">
@@ -117,3 +119,35 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus">
+.view-container
+  display flex
+  flex-flow column nowrap
+  padding-top 3rem
+  padding-bottom 3rem
+
+article
+  flex 1 1 auto
+
+  section
+    margin-top 3rem
+
+aside
+  flex 0 0 auto
+  margin-top 2rem
+
+.v-card header
+  padding 1rem 1.25rem
+  color #fff
+  background-color $BCgovBlue5
+
+@media (min-width: 960px)
+  .view-container
+      flex-flow row nowrap
+
+  aside
+    margin-top 0
+    margin-left 2rem
+    width 20rem
+</style>

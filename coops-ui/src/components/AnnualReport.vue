@@ -1,21 +1,18 @@
 <template>
   <div id="annual-report">
-    <v-container>
-      <div class="title-container">
-        <h1 id="AR-header">{{year}} Annual Report - <span style="font-style: italic">{{ reportState }}</span>
-        </h1>
-        <div v-if="filedDate == null">
-          <p>Review and certify your {{year}} Annual Report information.</p>
-          <h3 id="AR-step-1-header">1. Enter your Annual General Meeting Date</h3>
-          <div id="AR-step-1-container">
-            <AGMDate/>
-          </div>
-        </div>
-        <div v-else>
-          <ARComplete/>
-        </div>
-      </div>
-    </v-container>
+    <h1 id="AR-header">{{year}} Annual Report - <span style="font-style: italic">{{ reportState }}</span></h1>
+    <div v-if="filedDate == null">
+      <p>Review and certify your {{year}} Annual Report information.</p>
+      <section>
+        <h2>1. Enter your Annual General Meeting Date</h2>
+        <v-card>
+          <AGMDate/>
+        </v-card>
+      </section>
+    </div>
+    <div v-else>
+      <ARComplete/>
+    </div>
   </div>
 </template>
 
@@ -49,25 +46,15 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  @import "../assets/styles/theme.styl";
+h1, h2
+  margin-bottom 1.5rem
 
-  #AR-header
-    display inline-block
-    font-size 2rem
-    font-weight 500
+@media (min-width 768px)
+  h1
+    margin-bottom 2rem
 
-  #AR-step-1-header
-    font-weight 500
-    margin-top 3rem
-
-  #AR-step-1-container
-    margin-left 1.5rem
-    margin-top 2rem
-
-  .title-container
-    margin-bottom 0.5rem
-
-  p
-    margin-top 1rem
+  .intro-text
+    margin-bottom 3rem
+    font-size 1.125rem
 
 </style>

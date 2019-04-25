@@ -1,7 +1,9 @@
 <template>
   <v-app class="app-container" id="app">
     <std-header></std-header>
-    <router-view/>
+    <main>
+      <router-view/>
+    </main>
   </v-app>
 </template>
 
@@ -19,4 +21,5 @@ export default {
 <style lang="stylus">
   @import "./assets/styles/base.styl";
   @import "./assets/styles/layout.styl";
+  @import "./assets/styles/overrides.styl";
 </style>
