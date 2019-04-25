@@ -26,22 +26,23 @@
             </v-text-field>
           </template>
           <v-date-picker id="agm-datepicker"
-                         v-model="date"
-                         :min=minDate
-                         :max=maxDate
-                         color="blue"
-                         show-current="false"
-                         no-title
-                         @input="agmDatePicker = true">
+            v-model="date"
+            :min=minDate
+            :max=maxDate
+            color="blue"
+            show-current="false"
+            no-title
+            @input="agmDatePicker = true">
             <v-btn flat color="blue" @click="$refs.agmDatePicker.save(date)">OK</v-btn>
             <v-btn flat color="blue" @click="agmDatePicker = false">Cancel</v-btn>
           </v-date-picker>
         </v-menu>
       </v-flex>
       <v-checkbox v-if="this.year != this.currentDate.substring(0,4)"
-                  id="agm-checkbox"
-                  v-model="didNotHoldAGM"
-                  :label=checkBoxLabel></v-checkbox>
+        id="agm-checkbox"
+        v-model="didNotHoldAGM"
+        :label=checkBoxLabel>
+      </v-checkbox>
     </v-container>
   </div>
 </template>

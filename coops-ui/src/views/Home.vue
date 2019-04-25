@@ -130,9 +130,6 @@ export default {
 article
   flex 1 1 auto
 
-  section
-    margin-top 3rem
-
 aside
   flex 0 0 auto
   margin-top 2rem
