@@ -158,19 +158,67 @@
           <header>
             <h2>2. Director Information (as of April 1, 2019)</h2>
             <p>Tell us who was elected or appointed and who ceased to be a director at your 2018 AGM.</p>
-            <v-form v-on:submit.prevent="addNewDirector">
-              <v-text-field box label="First Name" v-model="director.firstName"></v-text-field>
-              <v-text-field box label="Last Name" v-model="director.lastName"></v-text-field>
-              <v-btn @click="addNewDirector">Add New</v-btn>
-            </v-form>
+            <v-expand-transition>
+              <div v-show="!showNewDirectorForm">
+                <v-btn @click="addNewDirector" outline color="blue" style="margin-bottom: 1.5rem">Add New Director</v-btn>
+              </div>
+            </v-expand-transition>
           </header>
           <v-card>
+            <v-expand-transition>
+              <ul class="list director-list" v-show="showNewDirectorForm">
+                <li class="container">
+                  <div class="meta-container">
+                    <label>Add New Director</label>
+                    <div class="meta-container__inner">
+                      <v-form ref="newDirectorForm" v-on:submit.prevent="addNewDirector" v-model="newDirectorFormValid" lazy-validation>
+                        <div class="form__row three-column">
+                          <v-text-field box class="item" label="First Name"
+                            v-model="director.firstName"
+                            :rules="newDirectorFirstNameRules"
+                            required></v-text-field>
+                          <v-text-field box label="Initial" class="item director-initial"
+                            v-model="director.initial"
+                          ></v-text-field>
+                          <v-text-field box class="item" label="Last Name"
+                            v-model="director.lastName"
+                            :rules="newDirectorLastNameRules"
+                            required></v-text-field>
+                        </div>
+                        <div class="form__row">
+                          <v-text-field box label="Street Address">
+                          </v-text-field>
+                        </div>
+                        <div class="form__row three-column">
+                          <v-text-field class="item" box label="City">
+                          </v-text-field>
+                          <v-select class="item" box label="Province" :items="Regions" disabled></v-select>
+                          <v-text-field class="item" box label="Postal Code">
+                          </v-text-field>
+                        </div>
+                        <div class="form__row">
+                          <v-text-field box label="Country" disabled></v-text-field>
+                        </div>
+                        <div class="form__row">
+                          <v-textarea box rows="2" auto-grow label="Delivery Instructions (Optional)"
+                          ></v-textarea>
+                        </div>
+                        <div class="form__row form__btns">
+                          <v-btn @click="validateNewDirectorForm" color="primary">Add New Director</v-btn>
+                          <v-btn @click="cancelNewDirector">Cancel</v-btn>
+                        </div>
+                      </v-form>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </v-expand-transition>
             <ul class="list director-list">
               <li class="container"
                 v-for="(director, index) in orderBy(directors, 'id', -1)"
                 v-bind:key="index">
                 <div class="meta-container">
-                  <label><span>{{director.firstName}}</span><span>&nbsp;{{director.lastName}} {{ index }}</span></label>
+                  <label><span>{{director.firstName}}</span><span>&nbsp;{{director.lastName}} {{ director.id }}</span></label>
                   <div class="meta-container__inner">
                     <v-expand-transition>
                       <div class="address-block" v-show="activeIndex !== index">
@@ -279,6 +327,7 @@ export default {
 
       isEditing: false,
       showAddressForm: false,
+      showNewDirectorForm: false,
       inheritDeliveryAddress: true,
 
       // Validation
@@ -318,19 +367,27 @@ export default {
       // Directors
       isEditingDirector: false,
       directorFormValid: false,
-      director: { firstName: "", lastName: "" },
+      director: { id:"", firstName: "", lastName: "" },
       directors: [
         { id: 1, firstName: "Alli", lastName: "Myers", initial: "", street: "1111 First Street", city: "Victoria", region: "BC", postalCode: "V8A 2G8", country: "Canada"},
         { id: 2, firstName: "Nora", lastName: "Patton", initial: "", street: "2222 Second Street", city: "Victoria", region: "BC", postalCode: "V8A 2G8", country: "Canada"},
         { id: 3, firstName: "Phoebe", lastName: "Jones", initial: "", street: "3333 Third Street", city: "Victoria", region: "BC", postalCode: "V8A 2G8", country: "Canada"},
         { id: 4, firstName: "Cole", lastName: "Bryan", initial: "", street: "4444 Fourth Street", city: "Victoria", region: "BC", postalCode: "V8A 2G8", country: "Canada"}
       ],
-      activeIndex: undefined
+      activeIndex: undefined,
+
+      // New Director Form Validation
+      newDirectorFormValid: true,
+      newDirectorFirstNameRules: [
+        v => !!v || 'A first name is required',
+      ],
+      newDirectorLastNameRules: [
+        v => !!v || 'A last name is required',
+      ]
     }
   },
 
   methods: {
-    // Registered Office Address
     editAddress: function () {
       this.showAddressForm = true
       this.cancelEditDirector()
@@ -342,19 +399,39 @@ export default {
       this.showAddressForm = false
     },
 
-    // Directors
-    addNewDirector: function (index) {
+
+    // Add New Director
+    addNewDirector: function () {
+      this.showNewDirectorForm = true
+      this.activeIndex = null
+    },
+    validateNewDirectorForm: function (index) {
+      if (this.$refs.newDirectorForm.validate()) {
+        this.pushNewDirectorData()
+      }
+      else {
+      }
+    },
+    pushNewDirectorData: function (index) {
       let newDirector = {
+        id: this.directors.length + 1,
         firstName: this.director.firstName,
+        initial: this.director.initial,
         lastName: this.director.lastName
       }
       this.directors.push(newDirector)
     },
+    cancelNewDirector: function () {
+      this.showNewDirectorForm = false
+    },
 
+    // Modify Existing Directors
     editDirector: function (index) {
       this.activeIndex = index
+      this.cancelNewDirector()
       this.cancelEditAddress()
     },
+
     cancelEditDirector: function (index) {
       this.activeIndex = undefined
     },
@@ -496,8 +573,8 @@ ul
 
 // List Layout
 .list
-  li + li
-    border-top 1px solid $gray3
+  li
+    border-bottom 1px solid $gray3
 
 .address-list .form
   margin-top 1rem
