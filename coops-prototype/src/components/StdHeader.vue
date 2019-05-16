@@ -6,6 +6,9 @@
           alt="Province of British Columbia Logo"
           title="Province of British Columbia"/>
       </router-link>
+      <!--
+      <span>{{this.$route.name}}</span>
+      -->
     </div>
   </header>
 </template>
