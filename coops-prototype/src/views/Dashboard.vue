@@ -12,17 +12,17 @@
     <v-container class="view-container">
       <article>
         <header>
-          <h1>Annual Reports</h1>
+          <h1>Dashboard</h1>
         </header>
         <section>
           <h2>To Do <span class="text-muted">({{todoItems.length}})</span></h2>
           <v-card>
-            <ul class="dashboard-list">
-              <li class="dashboard-list-item"
+            <ul class="list todo-list">
+              <li class="list-item"
                 v-for="(item, index) in orderBy(todoItems, 'name', 1)"
                 v-bind:key="index">
-                <div class="name">{{item.name}}</div>
-                <div class="actions">
+                <div class="list-item-title">{{item.name}}</div>
+                <div class="list-item-actions">
                   <v-btn color="primary" @click="fileAnnualReport" :disabled="!item.enabled">File Now</v-btn>
                 </div>
               </li>
@@ -30,11 +30,44 @@
           </v-card>
         </section>
         <section>
-          <h2>Filing History</h2>
+          <h2>Recent Filing History <span class="text-muted">({{filedItems.length}})</span></h2>
           <v-card>
-            <ul>
-              <li class="dashboard-list-item"><span class="text-muted">You have no previous filings</span></li>
-            </ul>
+            <v-expansion-panel>
+              <v-expansion-panel-content
+                class="filing-history-list"
+                v-for="(item, index) in orderBy(filedItems, 'name', 1)"
+                v-bind:key="index">
+                <template v-slot:header>
+                  <div class="list-item">
+                    <div class="list-item-title">{{item.name}}</div>
+                    <div class="list-item-subtitle">Filed by {{item.filingAuthor}} on {{item.filingDate}}</div>
+                  </div>
+                </template>
+                <ul class="list document-list">
+                  <li class="list-item"
+                    v-for="(document, index) in orderBy(item.filingDocuments, 'name', 1)"
+                    v-bind:key="index">
+                    <a href="#">
+                      <img class="list-item-icon" src="@/assets/images/icons/file-pdf-outline.svg" />
+                      <div class="list-item-title">
+                        {{document.name}}
+                      </div>
+                    </a>
+                  </li>
+                  <li class="list-item">
+                    <a href="#">
+                      <img class="list-item-icon" src="@/assets/images/icons/file-pdf-outline.svg" />
+                      <div class="list-item-title">
+                        Receipt
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+                <div class="documents-actions-bar">
+                  <v-btn class="download-all-btn" color="primary">Download All</v-btn>
+                </div>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
           </v-card>
         </section>
       </article>
@@ -59,11 +92,41 @@
     data () {
       return {
         todoItems: [
-          // { name: 'Annual Report (2018)', enabled: true },
-          { name: 'File 2019 Annual Report', enabled: true }
+          { name: 'File 2018 Annual Report', enabled: true },
+          { name: 'File 2019 Annual Report', enabled: true },
         ],
 
         filedItems: [
+          { name: 'Annual Report (2017)',
+            filingAuthor: 'Jane Doe',
+            filingDate: 'Feb 01, 2018',
+            filingStatus: 'Complete',
+            filingDocuments: [
+              { name: 'Change of Address' },
+              { name: 'Change of Directors' },
+              { name: 'Annual Report'},
+            ]
+          },
+          { name: 'Annual Report (2016)',
+            filingAuthor: 'Jane Doe',
+            filingDate: 'Feb 05, 2017',
+            filingStatus: 'Complete',
+            filingDocuments: [
+              { name: 'Change of Address' },
+              { name: 'Change of Directors' },
+              { name: 'Annual Report'},
+            ]
+          },
+          { name: 'Annual Report (2015)',
+            filingAuthor: 'Jane Doe',
+            filingDate: 'Feb 07, 2016',
+            filingStatus: 'Complete',
+            filingDocuments: [
+              { name: 'Change of Address' },
+              { name: 'Change of Directors' },
+              { name: 'Annual Report'},
+            ]
+          },
         ],
 
         showLoading: false,
@@ -87,31 +150,78 @@
 <style lang="stylus" scoped>
   @import "../assets/styles/theme.styl"
 
-  ul
+  // TODO: Create/Move to Helper Stylesheet
+  .text-muted
+    color $gray5
+
+  // Common
+  .list
     margin 0
     padding 0
+    list-style-type none
 
-  .dashboard-list-item
+  .list-item
     display flex
+    flex-direction row
     align-items center
-    padding 1rem
+    padding 1.25rem
     background #fff
     font-size 0.875rem
 
-    .name
-      font-weight 700
-
-    .actions
-      margin-left auto
-
-    .v-btn
-      min-width 10rem
-      font-weight 500
-
-  .dashboard-list-item + .dashboard-list-item
+  .list-item + .list-item
     border-top 1px solid $gray3
 
-  .text-muted
-    color $gray6
+  .list-item-icon
+    margin-top -1px
+    margin-right 0.5rem
+    opacity 0.4
+
+  .list-item-title
+    font-weight 700
+
+  .list-item-subtitle
+    color $gray5
     font-weight 400
+
+  .list-item-actions
+    flex 0 0 auto
+    margin-left auto
+
+    .v-btn
+      margin 0
+      min-width 8rem
+      font-weight 500
+
+  // Filing History
+  .filing-history-list .list-item
+    flex-direction column
+    align-items flex-start
+    padding 0
+
+  // Document List
+  .document-list
+    border-top 1px solid $gray3
+
+    .list-item a
+      display flex
+      flex-direction row
+      align-items center
+      padding 0.5rem
+
+    .list-item-title
+      font-weight 400
+
+  // Documents Action Bar
+  .documents-actions-bar
+    padding-top 1rem
+    padding-bottom 1.25rem
+    display flex
+    border-top 1px solid $gray3
+
+    .v-btn
+      margin-right 0
+
+  .download-all-btn
+    margin-left auto
+    min-width 8rem
 </style>
