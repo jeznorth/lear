@@ -41,13 +41,12 @@
   import Vue2Filters from 'vue2-filters'
 
   export default {
-    name: 'filingHistory',
+    name: 'filingHistoryList',
     mixins: [Vue2Filters.mixin],
 
     data () {
       return {
         expand: true,
-        props: ['filedItemsCount'],
 
         filedItems: [
           { name: 'Annual Report (2017)',
@@ -82,11 +81,17 @@
           },
         ]
       }
+    },
+
+    created: function () {
+      this.$emit('filingCount', this.filedItems.length)
     }
   }
 </script>
 
 <style lang="stylus">
+  @import "../assets/styles/theme.styl"
+
   // Filing History
   .filing-history-list .list-item
     flex-direction column

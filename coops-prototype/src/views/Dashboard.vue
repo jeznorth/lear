@@ -17,25 +17,15 @@
         <div class="dashboard-content">
           <div class="dashboard-content__main">
             <section>
-              <h2>To Do <span class="text-muted">({{todoItems.length}})</span></h2>
-              <v-card flat>
-                <ul class="list todo-list">
-                  <li class="list-item"
-                    v-for="(item, index) in orderBy(todoItems, 'name', 1)"
-                    v-bind:key="index">
-                    <div class="list-item-title">{{item.name}}</div>
-                    <div class="list-item-actions">
-                      <v-btn color="primary" @click="fileAnnualReport" :disabled="!item.enabled">File Now</v-btn>
-                    </div>
-                  </li>
-                </ul>
-              </v-card>
+              <h2>To Do <span class="text-muted">({{ this.toDoListTotal }})</span></h2>
+              <ToDoList @todolength="showToDoListCount"></ToDoList>
             </section>
             <section>
-              <h2>Recent Filing History <span class="text-muted"></span></h2>
-              <filing-history @clicked="onClickChild"></filing-history>
+              <h2>Recent Filing History <span class="text-muted">({{ this.filingHistoryListTotal }})</span></h2>
+              <FilingHistoryList @filingCount="showFilingCount"></FilingHistoryList>
             </section>
           </div>
+
           <!--
           <aside class="dashboard-content__aside">
             <section>
@@ -52,6 +42,7 @@
             </section>
           </aside>
           -->
+
         </div>
       </article>
     </v-container>
@@ -63,7 +54,8 @@
   import AddressListSm from '@/components/AddressListSm.vue'
   import DirectorListSm from '@/components/DirectorListSm.vue'
   import EntityInfo from '@/components/EntityInfo.vue'
-  import FilingHistory from '@/components/FilingHistory.vue'
+  import FilingHistoryList from '@/components/FilingHistoryList.vue'
+  import ToDoList from '@/components/ToDoList.vue'
   import Vue2Filters from 'vue2-filters'
 
   Vue.use(Vue2Filters)
@@ -75,29 +67,27 @@
       AddressListSm,
       DirectorListSm,
       EntityInfo,
-      FilingHistory
+      FilingHistoryList,
+      ToDoList
     },
 
     data () {
       return {
-        todoItems: [
-          { name: 'File 2018 Annual Report', enabled: true },
-          { name: 'File 2019 Annual Report', enabled: true },
-        ],
+        filingHistoryListTotal: '',
+        toDoListTotal: '',
 
         showLoading: false,
-        loadingMsg: 'Preparing your Annual Report'
+        loadingMsg: 'Preparing your Annual Report',
       }
     },
 
     methods: {
-      gotoAnnualReport: function () {
-        this.$router.push({ path: '/AnnualReport' })
+      showToDoListCount(value) {
+        this.toDoListTotal = value
       },
 
-      fileAnnualReport: function () {
-        this.showLoading = true
-        setTimeout(() => { this.gotoAnnualReport() })
+      showFilingCount(value) {
+        this.filingHistoryListTotal = value
       }
     }
   }
