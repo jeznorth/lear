@@ -26,7 +26,7 @@
             </section>
           </div>
 
-          <!--
+
           <aside class="dashboard-content__aside">
             <section>
               <h2>Registered Office Addresses</h2>
@@ -41,7 +41,7 @@
               </v-card>
             </section>
           </aside>
-          -->
+
 
         </div>
       </article>
