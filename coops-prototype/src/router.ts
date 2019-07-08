@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import AnnualReport from './views/AnnualReport.vue'
 import AnnualReportAlt from './views/AnnualReportAlt.vue'
 import Dashboard from './views/Dashboard.vue'
+import DashboardAlt from './views/DashboardAlt.vue'
 import DashboardSuccess from './views/DashboardSuccess.vue'
 import Payment from './views/Payment.vue'
 import PaymentCart from './views/PaymentCart.vue'
@@ -24,6 +25,11 @@ export default new Router({
       path: '/dashboard',
       name: 'dashboard',
       component: Dashboard
+    },
+    {
+      path: '/dashboardAlt',
+      name: 'dashboardAlt',
+      component: DashboardAlt
     },
     {
       path: '/dashboardsuccess',

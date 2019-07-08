@@ -17,6 +17,18 @@
         <div class="dashboard-content">
           <div class="dashboard-content__main">
             <section>
+              <h2>Current Directors</h2>
+              <director-list-sm layout="card"></director-list-sm>
+            </section>
+            <section>
+              <h2>Registered Office Addresses</h2>
+              <v-card flat>
+              <address-list-sm></address-list-sm>
+              </v-card>
+            </section>
+           
+           <!--
+            <section>
               <h2>To Do <span class="text-muted">({{ this.toDoListTotal }})</span></h2>
               <ToDoList @todolength="showToDoListCount"></ToDoList>
             </section>
@@ -24,25 +36,25 @@
               <h2>Recent Filing History <span class="text-muted">({{ this.filingHistoryListTotal }})</span></h2>
               <FilingHistoryList @filingCount="showFilingCount"></FilingHistoryList>
             </section>
+            -->
+            
           </div>
-
 
           <aside class="dashboard-content__aside">
             <section>
-              <h2>Registered Office Addresses</h2>
+              <h2>To Do</h2>
               <v-card flat>
-                <address-list-sm></address-list-sm>
+                <ToDoList @todolength="showToDoListCount"></ToDoList>
               </v-card>
             </section>
             <section>
-              <h2>Current Directors</h2>
+              <h2>Recent Filing History</h2>
               <v-card flat>
-                <director-list-sm></director-list-sm>
+                <FilingHistoryList @filingCount="showFilingCount"></FilingHistoryList>
               </v-card>
             </section>
           </aside>
-
-
+          
         </div>
       </article>
     </v-container>
@@ -50,6 +62,7 @@
 </template>
 
 <script lang='ts'>
+  import { Component, Vue } from 'vue-property-decorator'
   import AddressListSm from '@/components/AddressListSm.vue'
   import DirectorListSm from '@/components/DirectorListSm.vue'
   import EntityInfo from '@/components/EntityInfo.vue'
@@ -57,8 +70,10 @@
   import ToDoList from '@/components/ToDoList.vue'
   import Vue2Filters from 'vue2-filters'
 
+  Vue.use(Vue2Filters)
+
   export default {
-    name: "Dashboard",
+    name: "DashboardAlt",
     mixins: [Vue2Filters.mixin],
     components: {
       AddressListSm,
@@ -97,12 +112,19 @@
   h1
     margin-bottom 0
 
+  h2 
+    font-weight 700
+
   .dashboard-content
     display flex
+    margin -1rem
+    justify-content space-evenly
 
   .dashboard-content__main
     flex 1 1 auto
+    margin 1rem
 
   .dashboard-content__aside
-    margin-left 2rem
+    flex 1 1 auto
+    margin 1rem
 </style>
