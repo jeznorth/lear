@@ -21,7 +21,7 @@
               <director-list-sm layout="card"></director-list-sm>
             </section>
             <section>
-              <h2>Registered Office Addresses</h2>
+              <h2>Office Addresses</h2>
               <v-card flat>
               <address-list-sm></address-list-sm>
               </v-card>
@@ -37,7 +37,7 @@
               <FilingHistoryList @filingCount="showFilingCount"></FilingHistoryList>
             </section>
             -->
-            
+
           </div>
 
           <aside class="dashboard-content__aside">

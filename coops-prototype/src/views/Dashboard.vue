@@ -26,16 +26,27 @@
             </section>
           </div>
 
-
           <aside class="dashboard-content__aside">
             <section>
-              <h2>Registered Office Addresses</h2>
+              <header>
+                <h2>Office Addresses</h2>
+                <v-btn flat small color="primary">
+                  <v-icon small>edit</v-icon>
+                  <span>EDIT</span>
+                </v-btn>
+              </header>
               <v-card flat>
                 <address-list-sm></address-list-sm>
               </v-card>
             </section>
             <section>
-              <h2>Current Directors</h2>
+              <header>
+                <h2>Current Directors</h2>
+                <v-btn flat small color="primary">
+                  <v-icon small>edit</v-icon>
+                  <span>EDIT</span>
+                </v-btn>
+              </header>
               <v-card flat>
                 <director-list-sm></director-list-sm>
               </v-card>
@@ -105,4 +116,13 @@
 
   .dashboard-content__aside
     margin-left 2rem
+
+  section header 
+    display flex
+    flex-direction row
+
+    .v-btn
+      margin-top 0
+      margin-right 0
+      margin-left auto
 </style>

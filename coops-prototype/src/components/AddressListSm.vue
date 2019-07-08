@@ -1,7 +1,9 @@
 <template>
   <ul class="list">
     <li class="list-item">
-      <v-icon color="primary">mail_outline</v-icon>
+      <v-avatar>
+        <v-icon color="primary">mail_outline</v-icon>
+      </v-avatar>
       <div class="address">
         <div class="list-item__title">Mailing Address</div>
         <div class="list-item__subtitle">
@@ -14,7 +16,9 @@
       </div>
     </li>
     <li class="list-item">
-      <v-icon color="primary">local_shipping</v-icon>
+      <v-avatar>
+        <v-icon color="primary">local_shipping</v-icon>
+      </v-avatar>
       <div class="address">
         <div class="list-item__title">Delivery Address</div>
         <div class="list-item__subtitle">

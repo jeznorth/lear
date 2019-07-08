@@ -1,8 +1,8 @@
 <template>
   <ul class="list" :class="layout">
     <li class="list-item" v-for="director in directors" v-bind:key="director.id">
-      <v-avatar color="grey lighten-1" size="32">
-        <span class="white--text title">{{ director.firstName.substring(0,1)}}</span>
+      <v-avatar color="primary" size="25">
+        <span class="white--text small">{{ director.firstName.substring(0,1)}}</span>
       </v-avatar>
       <div class="director-info">
         <div class="list-item__title">{{ director.firstName }} {{ director.lastName }}</div>
