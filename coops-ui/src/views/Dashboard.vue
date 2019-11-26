@@ -6,8 +6,8 @@
           <h1>Dashboard</h1>
         </header>
 
-        <div class="dashboard-content">
-          <div class="dashboard-content__main">
+        <v-row>
+          <v-col cols="12" lg="9">
             <section>
               <header>
                 <h2 class="mb-3">To Do <span class="text-muted">({{todoCount}})</span></h2>
@@ -24,9 +24,9 @@
               <filing-history-list @filed-count="filedCount = $event"
                                    @filings-list="historyFilings = $event" />
             </section>
-          </div>
+          </v-col>
 
-          <aside class="dashboard-content__aside">
+          <v-col cols="12" lg="3">
             <section>
               <header class="aside-header mb-3">
                 <h2>Office Addresses</h2>
@@ -40,7 +40,6 @@
                 <address-list-sm></address-list-sm>
               </v-card>
             </section>
-
             <section>
               <header class="aside-header mb-3">
                 <h2>Current Directors</h2>
@@ -54,8 +53,8 @@
                 <director-list-sm></director-list-sm>
               </v-card>
             </section>
-          </aside>
-        </div>
+          </v-col>
+        </v-row>
       </article>
     </v-container>
   </div>

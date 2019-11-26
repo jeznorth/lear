@@ -34,56 +34,62 @@
       </div>
 
       <v-container id="standalone-office-address-container" class="view-container">
-        <article id="standalone-office-address-article">
-          <header>
-            <h1 id="filing-header">Address Change</h1>
-          </header>
+        <v-row>
+          <v-col cols="12" lg="9">
+            <article id="standalone-office-address-article">
+              <header>
+                <h1 id="filing-header">Address Change</h1>
+              </header>
 
-          <!-- Registered Office Addresses -->
-          <section>
-            <RegisteredOfficeAddress
-              :changeButtonDisabled="false"
-              :legalEntityNumber="entityIncNo"
-              :addresses.sync="addresses"
-              @modified="officeModifiedEventHandler($event)"
-              @valid="officeAddressFormValid = $event"
-            />
-          </section>
+              <!-- Registered Office Addresses -->
+              <section>
+                <RegisteredOfficeAddress
+                  :changeButtonDisabled="false"
+                  :legalEntityNumber="entityIncNo"
+                  :addresses.sync="addresses"
+                  @modified="officeModifiedEventHandler($event)"
+                  @valid="officeAddressFormValid = $event"
+                />
+              </section>
 
-          <!-- Certify -->
-          <section>
-            <header>
-              <h2 id="AR-step-4-header">Certify Correct</h2>
-              <p>Enter the name of the current director, officer, or lawyer submitting this Annual Report.</p>
-            </header>
-            <Certify
-              :isCertified.sync="isCertified"
-              :certifiedBy.sync="certifiedBy"
-              @valid="certifyFormValid=$event"
-            />
-          </section>
+              <!-- Certify -->
+              <section>
+                <header>
+                  <h2 id="AR-step-4-header">Certify Correct</h2>
+                  <p>Enter the name of the current director, officer, or lawyer submitting this Annual Report.</p>
+                </header>
+                <Certify
+                  :isCertified.sync="isCertified"
+                  :certifiedBy.sync="certifiedBy"
+                  @valid="certifyFormValid=$event"
+                />
+              </section>
 
-          <!-- Staff Payment -->
-          <section v-if="isRoleStaff && isPayRequired">
-            <header>
-              <h2 id="AR-step-5-header">Staff Payment</h2>
-            </header>
-            <StaffPayment
-              :value.sync="routingSlipNumber"
-              @valid="staffPaymentFormValid=$event"
-            />
-          </section>
-        </article>
+              <!-- Staff Payment -->
+              <section v-if="isRoleStaff && isPayRequired">
+                <header>
+                  <h2 id="AR-step-5-header">Staff Payment</h2>
+                </header>
+                <StaffPayment
+                  :value.sync="routingSlipNumber"
+                  @valid="staffPaymentFormValid=$event"
+                />
+              </section>
+            </article>
+          </v-col>
 
-        <aside>
-          <affix relative-element-selector="#standalone-office-address-article" :offset="{ top: 120, bottom: 40 }">
-            <sbc-fee-summary
-              v-bind:filingData="[...filingData]"
-              v-bind:payURL="payAPIURL"
-              @total-fee="totalFee=$event"
-            />
-          </affix>
-        </aside>
+          <v-col cols="12" lg="3" style="position: relative;">
+            <aside>
+              <affix relative-element-selector="#standalone-office-address-article" :offset="{ top: 120, bottom: 40 }">
+                <sbc-fee-summary
+                  v-bind:filingData="[...filingData]"
+                  v-bind:payURL="payAPIURL"
+                  @total-fee="totalFee=$event"
+                />
+              </affix>
+            </aside>
+          </v-col>
+        </v-row>
       </v-container>
 
       <v-container id="buttons-container" class="list-item">

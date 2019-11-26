@@ -270,6 +270,19 @@ export default {
     storeTasks (response) {
       if (response && response.data && response.data.tasks) {
         this.setTasks(response.data.tasks)
+<<<<<<< Updated upstream
+=======
+        // FOR TESTING ONLY
+        const tasks = [
+          // eslint-disable-next-line
+          {"enabled":true,"order":1,"task":{"todo":{"business":{"fiscalYearEndDate":"2019-10-03","foundingDate":"1985-01-22T00:00:00+00:00","identifier":"CP0001468","lastAnnualGeneralMeetingDate":"2018-09-12","lastAnnualReport":"2018-09-12","lastLedgerTimestamp":"2018-11-13T00:00:00+00:00","lastModified":"2019-10-03T20:57:01.030439+00:00","legalName":"MANANA PARK WATER CO-OPERATIVE","legalType":"CP","nextAnnualReport":"2019-09-12T00:00:00+00:00"},"header":{"ARFilingYear":2019,"name":"annualReport","status":"DRAFT"}}}},
+          // eslint-disable-next-line
+          {"enabled":false,"order":2,"task":{"filing":{"business":{"foundingDate":"1985-01-22","identifier":"CP0001468","legalName":"MANANA PARK WATER CO-OPERATIVE"},"changeOfDirectors":{"directors":[{"actions":["ceased"],"appointmentDate":"2019-10-18","cessationDate":"2019-10-22","deliveryAddress":{"addressCity":"Burbank","addressCountry":"US","addressRegion":"--","deliveryInstructions":"","postalCode":"91505-4175","streetAddress":"3400 Warner Blvd","streetAddressAdditional":"Trailer D"},"id":1,"isDirectorActionable":true,"isFeeApplied":true,"mailingAddress":{"addressCity":"Burbank","addressCountry":"US","addressRegion":"--","deliveryInstructions":"","postalCode":"91505-4175","streetAddress":"3400 Warner Blvd","streetAddressAdditional":"Trailer D"},"officer":{"firstName":"DAFFY","lastName":"DUCK","middleInitial":"H.","prevFirstName":"DAFFY","prevLastName":"DUCK","prevMiddleInitial":"H."}},{"actions":["ceased"],"appointmentDate":"2019-10-21","cessationDate":"2019-10-22","deliveryAddress":{"addressCity":"Dartmouth","addressCountry":"CA","addressRegion":"NS","deliveryInstructions":"","postalCode":"B3B 1S4","streetAddress":"S-121 Ilsley Ave","streetAddressAdditional":"asdf"},"id":2,"isDirectorActionable":true,"isFeeApplied":true,"mailingAddress":{"addressCity":"Dartmouth","addressCountry":"CA","addressRegion":"NS","deliveryInstructions":"","postalCode":"B3B 1S4","streetAddress":"S-121 Ilsley Ave","streetAddressAdditional":"asdf"},"officer":{"firstName":"BUGS","lastName":"BUNNY","middleInitial":"D.","prevFirstName":"BUGS","prevLastName":"BUNNY","prevMiddleInitial":"D."}}]},"header":{"certifiedBy":"Severin ","colinId":null,"date":"2019-10-22","email":"no_one@never.get","filingId":1135,"name":"changeOfDirectors","status":"DRAFT","submitter":"cp0001468"}}}},
+          // eslint-disable-next-line
+          {"enabled":false,"order":3,"task":{"filing":{"business":{"foundingDate":"1985-01-22","identifier":"CP0001468","legalName":"MANANA PARK WATER CO-OPERATIVE"},"changeOfAddress":{"deliveryAddress":{"actions":["addressChanged"],"addressCity":"Ladysmith","addressCountry":"CA","addressRegion":"BC","addressType":"","deliveryInstructions":"","postalCode":"V9G 1L7","streetAddress":"4750 Brenton-Page Rd","streetAddressAdditional":""},"mailingAddress":{"actions":["addressChanged"],"addressCity":"Ladysmith","addressCountry":"CA","addressRegion":"BC","addressType":"","deliveryInstructions":"","postalCode":"V9G 1L7","streetAddress":"4750 Brenton-Page Rd","streetAddressAdditional":""}},"header":{"certifiedBy":"Severin ","colinId":null,"date":"2019-10-22","email":"no_one@never.get","filingId":1133,"name":"changeOfAddress","paymentToken":"701","status":"PENDING","submitter":"cp0001468"}}}}
+        ]
+        this.setTasks(tasks)
+>>>>>>> Stashed changes
       } else {
         throw new Error('Invalid tasks')
       }

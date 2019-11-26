@@ -35,7 +35,7 @@ $app-header-height: 70px;
 }
 
 .container {
-  max-width: 1200px; // Using PX dimensions here to jive with vuetify (RE: breakpoints)
+  max-width: 1224px; // Using PX dimensions here to jive with vuetify (RE: breakpoints)
 }
 
 // Page Layout
@@ -50,45 +50,6 @@ $app-header-height: 70px;
 
     section {
       margin-top: 2.25rem;
-    }
-  }
-
-  aside {
-    flex: 0 0 auto;
-    width: 20rem;
-    margin-top: 3rem;
-
-    .affix {
-      width: 20rem;
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  .view-container {
-    aside {
-      width: 100%;
-
-      .affix {
-        position: relative;
-        top: 0 !important;
-        width: 100%;
-      }
-    }
-  }
-}
-
-@media (min-width: 960px) {
-  .view-container {
-    flex-flow: row nowrap;
-
-    article + aside {
-      margin-left: 2rem;
-    }
-
-    aside {
-      margin-top: 0;
-      width: 20rem;
     }
   }
 }
